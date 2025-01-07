@@ -24,8 +24,10 @@ export async function generateStaticParams() {
 export default async function KnowledgeArticlePage({
   params,
 }: PageProps): Promise<React.JSX.Element> {
+  const { slug } = await params;
+
   const { isEnabled } = await draftMode();
-  const article = await getArticle(params.slug, isEnabled);
+  const article = await getArticle(slug, isEnabled);
 
   if (!article) {
     notFound();
