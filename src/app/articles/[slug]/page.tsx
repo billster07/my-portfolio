@@ -11,7 +11,7 @@ interface Params {
   };
 }
 
-export async function generateStaticParams(): Promise<{ slug: string }[]> {
+export async function generateStaticParams() {
   const allArticles = await getAllArticles();
 
   return (
