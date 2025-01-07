@@ -5,11 +5,9 @@ import { notFound } from "next/navigation";
 import { Document } from "@contentful/rich-text-types";
 import { draftMode } from "next/headers";
 
-interface PageProps {
-  params: {
-    slug: string;
-  };
-}
+type PageProps = {
+  params: Promise<{ slug: string }>;
+};
 
 export async function generateStaticParams() {
   const allArticles = await getAllArticles();
@@ -21,9 +19,7 @@ export async function generateStaticParams() {
   );
 }
 
-export default async function KnowledgeArticlePage({
-  params,
-}: PageProps): Promise<React.JSX.Element> {
+export default async function KnowledgeArticlePage({ params }: PageProps) {
   const { slug } = await params;
 
   const { isEnabled } = await draftMode();
